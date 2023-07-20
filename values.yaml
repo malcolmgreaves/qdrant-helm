@@ -15,7 +15,7 @@ service:
   type: ClusterIP
   annotations: {}
   ports:
-    - name: rest
+    - name: http
       port: 6333
       targetPort: 6333
       protocol: TCP
@@ -24,7 +24,7 @@ service:
       port: 6334
       targetPort: 6334
       protocol: TCP
-      checksEnabled: false
+      checksEnabled: true
     - name: p2p
       port: 6335
       targetPort: 6335
