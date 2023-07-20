@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  labels:
+    {{- include "qdrant.labels" . | nindent 4 }}
+  name: {{ include "qdrant.fullname" . }}
+spec:
+  gateways:
+  - default/internal-gateway
+  hosts:
+  - {{ .Release.Name }}.ml-internal.scale.com
+  http:
+  - route:
+    - destination:
+        host: {{ .Release.Name }}.default.svc.cluster.local
+        port:
+          number: 6333

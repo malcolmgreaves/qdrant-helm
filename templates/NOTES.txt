@@ -8,3 +8,8 @@ If you want to use Qdrant via {{ .name }} execute the following commands
   kubectl --namespace {{ $.Release.Namespace }} port-forward $POD_NAME {{ .targetPort }}:{{ .targetPort }}
   {{- end }}
 {{- end }}
+
+To perform a healthcheck, run:
+
+  curl -X GET "https://{{ .Release.Name }}.ml-internal.scale.com/"
+
