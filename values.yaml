@@ -31,21 +31,6 @@ service:
       protocol: TCP
       checksEnabled: false
 
-ingress:
-  enabled: false
-  annotations: {}
-    # kubernetes.io/ingress.class: alb
-  hosts:
-    - host: example-domain.com
-      paths:
-        - path: /
-          pathType: Prefix
-          servicePort: 6333
-  tls: []
-    #- hosts:
-    #    - example-domain.com
-    #  secretName: tls-secret-name
-
 livenessProbe:
   enabled: true
   initialDelaySeconds: 5
@@ -73,13 +58,13 @@ startupProbe:
 podAnnotations: {}
 podLabels: {}
 
-resources: {}
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
 
 nodeSelector: {}
 
@@ -89,7 +74,7 @@ affinity: {}
 
 persistence:
   accessModes: ["ReadWriteOnce"]
-  size: 10Gi
+  size: 1000Gi
   #storageClassName: local-path
 
 #only supported for single node qdrant clusters.
