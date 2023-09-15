@@ -37,13 +37,17 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["/bin/sh", "-c"]
-          args: ["./config/initialize.sh"]
+          args: ["./qdrant"]
           ports:
           {{- range .Values.service.ports }}
             - name: {{ .name }}
               containerPort: {{ .targetPort }}
               protocol: {{ .protocol }}
           {{- end }}
+
+          env:
+          - name: QDRANT__SERVICE__HOST
+            value: '::'
 
           {{- $values := .Values -}}
           {{- range .Values.service.ports }}
@@ -53,7 +57,7 @@ spec:
             grpc:
               port: {{ .targetPort }}
             {{- end }}
-            {{- if eq .name "rest"}}
+            {{- if eq .name "http"}}
             httpGet:
               path: /
               port: {{ .targetPort }}
@@ -70,7 +74,7 @@ spec:
             grpc:
               port: {{ .targetPort }}
             {{- end }}
-            {{- if eq .name "rest"}}
+            {{- if eq .name "http"}}
             httpGet:
               path: /
               port: {{ .targetPort }}
@@ -87,7 +91,7 @@ spec:
             grpc:
               port: {{ .targetPort }}
             {{- end }}
-            {{- if eq .name "rest"}}
+            {{- if eq .name "http"}}
             httpGet:
               path: /
               port: {{ .targetPort }}

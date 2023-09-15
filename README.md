@@ -10,7 +10,7 @@ For production use cases, please pin the version of the qdrant image in the valu
 
 
 ```bash
-helm repo add qdrant https://qdrant.github.io/qdrant-helm
+helm repo add qdrant https://malcolmgreaves.github.io/qdrant-helm
 helm repo update
 helm install your-qdrant-installation-name qdrant/qdrant
 ```

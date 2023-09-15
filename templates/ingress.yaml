@@ -36,4 +36,3 @@ spec:
       secretName: {{ .secretName | quote }}
   {{- end }}
 {{- end }}
-
